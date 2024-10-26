@@ -195,7 +195,7 @@ This program is also 100% Free.
 
 <p align="center">
 	<img src="https://www.softpedia.com/_img/softpedia_100_free.png" />
-	<p align="center"><i>Last updated: August 3, 2024 (Roberto Zamfir)</i></p>
+	<p align="center"><i>Last updated: October 26, 2024 (Andrei Verdeanu)</i></p>
 </p>
 
 The [SourceForge project](https://sourceforge.net/projects/dismtools/) also keeps track of new releases in this repository, so you can download the latest releases from there as well.
@@ -258,7 +258,7 @@ If you want to contribute to this project, you can do so in many ways:
 
 We continue the development of the next version in the Preview branch. To go to it, select "dt_preview" from the branch list. Commits are done every day, and new builds are released every 2 weeks.
 
-However, if you want to download the latest release AS SOON AS the project is built with new changes, you can download the [nightly installer](https://github.com/CodingWonders/DISMTools/raw/dt_pre_24102/Installer/Nightly/dt_setup.exe).
+However, if you want to download the latest release AS SOON AS the project is built with new changes, you can download the [nightly installer](https://github.com/CodingWonders/DISMTools/raw/dt_pre_24111/Installer/Nightly/dt_setup.exe).
 
 <!-- **NOTE:** this branch contains release candidate builds of DISMTools 0.5.1, and will be deleted once this version gets published as a stable release -->
 
