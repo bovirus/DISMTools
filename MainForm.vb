@@ -528,8 +528,48 @@ Public Class MainForm
         End If
         Return 0
     End Function
+
+    Function GetCopyrightTimespan(ByVal start As Integer, ByVal current As Integer) As String
+        If current = start Then
+            Return current.ToString()
+        Else
+            Return start.ToString() & " - " & current.ToString()
+        End If
+    End Function
+
+    Sub InitDynaLog()
+        DynaLog.LogMessage("DISMTools - Version " & My.Application.Info.Version.ToString() & " (" & dt_codeName & "), build timestamp: " & PrgAbout.RetrieveLinkerTimestamp(My.Application.Info.DirectoryPath & "\" & My.Application.Info.AssemblyName & ".exe").ToString("yyMMdd-HHmm"))
+        ' Display copyright/author information for every component
+        DynaLog.LogMessage("Components:")
+        DynaLog.LogMessage("- Program: " & My.Application.Info.Copyright)
+        DynaLog.LogMessage("- ExtAppx.ps1/MImgMgr.ps1: © " & GetCopyrightTimespan(2023, Date.Now.Year) & " CodingWonders Software")
+        DynaLog.LogMessage("- PE Helper: © " & GetCopyrightTimespan(2024, Date.Now.Year) & " CodingWonders Software")
+        DynaLog.LogMessage("  Compilation Preprocessor by og-mrk (https://github.com/og-mrk), modified from WinUtil: © " & GetCopyrightTimespan(2022, 2022) & " CT Tech Group LLC")
+        DynaLog.LogMessage("- Scintilla.NET: " &
+                           "© " & GetCopyrightTimespan(2017, 2017) & " Jacob Slusser, " &
+                           "© " & GetCopyrightTimespan(2020, 2022) & " VPKSoft, " &
+                           "© " & GetCopyrightTimespan(2023, 2023) & " desjarlais")
+        DynaLog.LogMessage("- ManagedDism: © " & GetCopyrightTimespan(2016, 2016) & " Jeff Kluge")
+        DynaLog.LogMessage("- DarkUI: © " & GetCopyrightTimespan(2017, 2017) & " Robin Perris")
+        DynaLog.LogMessage("- DockPanelSuite: © " & GetCopyrightTimespan(2007, 2007) & " Weifen Luo")
+        DynaLog.LogMessage("- 7-Zip: " &
+                           "© " & GetCopyrightTimespan(1999, 2023) & " Igor Pavlov, " &
+                           "© " & GetCopyrightTimespan(2015, 2016) & " Apple Inc. (LZFSE compression library)")
+        DynaLog.LogMessage("- UnpEax: © " & GetCopyrightTimespan(2020, 2020) & " LioneL Christopher Chetty")
+        DynaLog.LogMessage("- UnattendGen: " &
+                           "© " & GetCopyrightTimespan(2024, Date.Now.Year) & " CodingWonders Software, " &
+                           "© " & GetCopyrightTimespan(2024, Date.Now.Year) & " Christoph Schneegans")
+        DynaLog.LogMessage("- Markdig: © " & GetCopyrightTimespan(2018, 2019) & " Alexandre Mutel")
+        DynaLog.LogMessage("- Windows API Code Pack: " &
+                           "© " & GetCopyrightTimespan(2009, 2010) & " Microsoft Corporation, " &
+                           "modifications by Jacob Slusser (" & GetCopyrightTimespan(2014, 2014) & "), and by " &
+                           "Peter William Wagner (" & GetCopyrightTimespan(2017, Date.Now.Year) & ")")
+        DynaLog.BeginLogging()
+        DynaLog.LogMessage("For version 0.6, this only shows the logging infrastructure's potential. No more logging with DynaLog will be performed from now on. In the future, logging will be implemented in the entire codebase.")
+    End Sub
     
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        InitDynaLog()
         ' Because of the DISM API, Windows 7 compatibility is out the window (no pun intended)
         If Environment.OSVersion.Version.Major = 6 And Environment.OSVersion.Version.Minor < 2 Then
             SplashScreen.Hide()
@@ -5452,6 +5492,9 @@ Public Class MainForm
                         UnattendedAnswerFileManagerToolStripMenuItem.Text = "Unattended answer file manager"
                         UnattendedAnswerFileCreatorToolStripMenuItem.Text = "Unattended answer file creator"
                         RegCplToolStripMenuItem.Text = "Manage image registry hives..."
+                        WebResourcesToolStripMenuItem.Text = "Web Resources"
+                        LanguagesAndOptionalFeaturesISOToolStripMenuItem.Text = "Download Languages and Optional Features ISOs..."
+                        LanguagesAndFODWin10ToolStripMenuItem.Text = "Download Languages and FOD discs for Windows 10..."
                         ReportManagerToolStripMenuItem.Text = "Report manager"
                         MountedImageManagerTSMI.Text = "Mounted image manager"
                         CreateDiscImageToolStripMenuItem.Text = "Create disc image..."
@@ -5780,6 +5823,9 @@ Public Class MainForm
                         UnattendedAnswerFileManagerToolStripMenuItem.Text = "Administrador de archivos de respuesta desatendida"
                         UnattendedAnswerFileCreatorToolStripMenuItem.Text = "Creador de archivos de respuesta desatendida"
                         RegCplToolStripMenuItem.Text = "Administrar subárboles del registro de la imagen..."
+                        WebResourcesToolStripMenuItem.Text = "Recursos web"
+                        LanguagesAndOptionalFeaturesISOToolStripMenuItem.Text = "Descargar archivos ISO de idiomas y características opcionales..."
+                        LanguagesAndFODWin10ToolStripMenuItem.Text = "Descargar discos de idiomas y características opcionales para Windows 10..."
                         ReportManagerToolStripMenuItem.Text = "Administrador de informes"
                         MountedImageManagerTSMI.Text = "Administrador de imágenes montadas"
                         CreateDiscImageToolStripMenuItem.Text = "Crear imagen de disco..."
@@ -6108,6 +6154,9 @@ Public Class MainForm
                         UnattendedAnswerFileManagerToolStripMenuItem.Text = "Gestionnaire de fichiers de réponse sans surveillance"
                         UnattendedAnswerFileCreatorToolStripMenuItem.Text = "Créateur de fichiers de réponse sans surveillance"
                         RegCplToolStripMenuItem.Text = "Gérer les ruches du registre de l'image..."
+                        WebResourcesToolStripMenuItem.Text = "Ressources Web"
+                        LanguagesAndOptionalFeaturesISOToolStripMenuItem.Text = "Télécharger les ISO de langues et de fonctionnalités optionnelles..."
+                        LanguagesAndFODWin10ToolStripMenuItem.Text = "Télécharger les langues et les disques FOD pour Windows 10..."
                         ReportManagerToolStripMenuItem.Text = "Gestionnaire de rapports"
                         MountedImageManagerTSMI.Text = "Gestionnaire des images montées"
                         CreateDiscImageToolStripMenuItem.Text = "Créer une image disque..."
@@ -6435,6 +6484,9 @@ Public Class MainForm
                         UnattendedAnswerFileManagerToolStripMenuItem.Text = "Gestor de ficheiros de resposta não assistida"
                         UnattendedAnswerFileCreatorToolStripMenuItem.Text = "Criador de ficheiros de resposta não assistida"
                         RegCplToolStripMenuItem.Text = "Gerir as colmeias do registo de imagens..."
+                        WebResourcesToolStripMenuItem.Text = "Recursos da Web"
+                        LanguagesAndOptionalFeaturesISOToolStripMenuItem.Text = " Descarregar ISOs de idiomas e caraterísticas opcionais..."
+                        LanguagesAndFODWin10ToolStripMenuItem.Text = "Descarregar discos de idiomas e FOD para o Windows 10..."
                         ReportManagerToolStripMenuItem.Text = "Gestor de relatórios"
                         MountedImageManagerTSMI.Text = "Gestor de imagens montadas"
                         CreateDiscImageToolStripMenuItem.Text = "Criar imagem de disco..."
@@ -6762,6 +6814,9 @@ Public Class MainForm
                         UnattendedAnswerFileManagerToolStripMenuItem.Text = "Gestore file di risposta non presidiata"
                         UnattendedAnswerFileCreatorToolStripMenuItem.Text = "Creatore file di risposta non presidiata"
                         RegCplToolStripMenuItem.Text = "Gestire gli alveari del registro delle immagini..."
+                        WebResourcesToolStripMenuItem.Text = "Risorse Web"
+                        LanguagesAndOptionalFeaturesISOToolStripMenuItem.Text = "Scarica le ISO delle lingue e delle caratteristiche opzionali..."
+                        LanguagesAndFODWin10ToolStripMenuItem.Text = "Scarica le lingue e i dischi FOD per Windows 10..."
                         ReportManagerToolStripMenuItem.Text = "Gestore dei rapporti"
                         MountedImageManagerTSMI.Text = "Gestore di immagini montate"
                         CreateDiscImageToolStripMenuItem.Text = "Crea immagine disco..."
@@ -7095,6 +7150,9 @@ Public Class MainForm
                 UnattendedAnswerFileManagerToolStripMenuItem.Text = "Unattended answer file manager"
                 UnattendedAnswerFileCreatorToolStripMenuItem.Text = "Unattended answer file creator"
                 RegCplToolStripMenuItem.Text = "Manage image registry hives..."
+                WebResourcesToolStripMenuItem.Text = "Web Resources"
+                LanguagesAndOptionalFeaturesISOToolStripMenuItem.Text = "Download Languages and Optional Features ISOs..."
+                LanguagesAndFODWin10ToolStripMenuItem.Text = "Download Languages and FOD discs for Windows 10..."
                 ReportManagerToolStripMenuItem.Text = "Report manager"
                 MountedImageManagerTSMI.Text = "Mounted image manager"
                 CreateDiscImageToolStripMenuItem.Text = "Create disc image..."
@@ -7423,6 +7481,9 @@ Public Class MainForm
                 UnattendedAnswerFileManagerToolStripMenuItem.Text = "Administrador de archivos de respuesta desatendida"
                 UnattendedAnswerFileCreatorToolStripMenuItem.Text = "Creador de archivos de respuesta desatendida"
                 RegCplToolStripMenuItem.Text = "Administrar subárboles del registro de la imagen..."
+                WebResourcesToolStripMenuItem.Text = "Recursos web"
+                LanguagesAndOptionalFeaturesISOToolStripMenuItem.Text = "Descargar archivos ISO de idiomas y características opcionales..."
+                LanguagesAndFODWin10ToolStripMenuItem.Text = "Descargar discos de idiomas y características opcionales para Windows 10..."
                 ReportManagerToolStripMenuItem.Text = "Administrador de informes"
                 MountedImageManagerTSMI.Text = "Administrador de imágenes montadas"
                 CreateDiscImageToolStripMenuItem.Text = "Crear imagen de disco..."
@@ -7750,6 +7811,9 @@ Public Class MainForm
                 UnattendedAnswerFileManagerToolStripMenuItem.Text = "Gestionnaire de fichiers de réponse sans surveillance"
                 UnattendedAnswerFileCreatorToolStripMenuItem.Text = "Créateur de fichiers de réponse sans surveillance"
                 RegCplToolStripMenuItem.Text = "Gérer les ruches du registre de l'image..."
+                WebResourcesToolStripMenuItem.Text = "Ressources Web"
+                LanguagesAndOptionalFeaturesISOToolStripMenuItem.Text = "Télécharger les ISO de langues et de fonctionnalités optionnelles..."
+                LanguagesAndFODWin10ToolStripMenuItem.Text = "Télécharger les langues et les disques FOD pour Windows 10..."
                 ReportManagerToolStripMenuItem.Text = "Gestionnaire de rapports"
                 MountedImageManagerTSMI.Text = "Gestionnaire des images montées"
                 CreateDiscImageToolStripMenuItem.Text = "Créer une image disque..."
@@ -8078,6 +8142,9 @@ Public Class MainForm
                 UnattendedAnswerFileManagerToolStripMenuItem.Text = "Gestor de ficheiros de resposta não assistida"
                 UnattendedAnswerFileCreatorToolStripMenuItem.Text = "Criador de ficheiros de resposta não assistida"
                 RegCplToolStripMenuItem.Text = "Gerir as colmeias do registo de imagens..."
+                WebResourcesToolStripMenuItem.Text = "Recursos da Web"
+                LanguagesAndOptionalFeaturesISOToolStripMenuItem.Text = " Descarregar ISOs de idiomas e caraterísticas opcionais..."
+                LanguagesAndFODWin10ToolStripMenuItem.Text = "Descarregar discos de idiomas e FOD para o Windows 10..."
                 ReportManagerToolStripMenuItem.Text = "Gestor de relatórios"
                 MountedImageManagerTSMI.Text = "Gestor de imagens montadas"
                 CreateDiscImageToolStripMenuItem.Text = "Criar imagem de disco..."
@@ -8405,6 +8472,9 @@ Public Class MainForm
                 UnattendedAnswerFileManagerToolStripMenuItem.Text = "Gestore file di risposta non presidiata"
                 UnattendedAnswerFileCreatorToolStripMenuItem.Text = "Creatore file di risposta non presidiata"
                 RegCplToolStripMenuItem.Text = "Gestire gli alveari del registro delle immagini..."
+                WebResourcesToolStripMenuItem.Text = "Risorse Web"
+                LanguagesAndOptionalFeaturesISOToolStripMenuItem.Text = "Scarica le ISO delle lingue e delle caratteristiche opzionali..."
+                LanguagesAndFODWin10ToolStripMenuItem.Text = "Scarica le lingue e i dischi FOD per Windows 10..."
                 ReportManagerToolStripMenuItem.Text = "Gestore dei rapporti"
                 MountedImageManagerTSMI.Text = "Gestore di immagini montate"
                 CreateDiscImageToolStripMenuItem.Text = "Crea immagine disco..."
@@ -11833,6 +11903,7 @@ Public Class MainForm
             DismProc.StartInfo.Arguments = "/cleanup-mountpoints"
             DismProc.Start()
         End If
+        DynaLog.EndLogging()
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
