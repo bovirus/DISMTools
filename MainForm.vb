@@ -538,6 +538,7 @@ Public Class MainForm
     End Function
 
     Sub InitDynaLog()
+        DynaLog.CheckLogAge()
         DynaLog.LogMessage("DISMTools - Version " & My.Application.Info.Version.ToString() & " (" & dt_codeName & "), build timestamp: " & PrgAbout.RetrieveLinkerTimestamp(My.Application.Info.DirectoryPath & "\" & My.Application.Info.AssemblyName & ".exe").ToString("yyMMdd-HHmm"))
         ' Display copyright/author information for every component
         DynaLog.LogMessage("Components:")
