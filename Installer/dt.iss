@@ -10,7 +10,7 @@
 #define MyAppAssocExt      ".dtproj"
 #define MyAppAssocKey      StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 
-#define pfDir               "{commonpf}\DISMTools\Stable"
+#define pfDir               "{commonpf}\DISMTools\Preview"
 
 #define scName              "DISMTools"
 
